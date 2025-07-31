@@ -1,0 +1,14 @@
+# node modules
+node_modules/
+
+# IDE
+.idea/
+
+# environment files
+.env
+
+# build output
+dist/
+
+# system files
+.DS_Store
