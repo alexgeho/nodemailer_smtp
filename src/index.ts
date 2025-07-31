@@ -6,7 +6,6 @@ import { emailRouter } from './routes/email-router';
 const app: express.Express = express();
 
 app.use(cors());
-app.use(bodyParser.json());
 app.use(express.json());
 
 const port = process.env.PORT || 5003;
