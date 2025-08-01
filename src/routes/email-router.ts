@@ -1,15 +1,16 @@
-import { Request, Response, Router } from "express";
+import {Request, Response, Router} from "express";
 import {emailAdapter} from "../adapter/email-adapter";
+import {businessService} from "../domain/business-service";
 
 export const emailRouter = Router();
 
 emailRouter
 
-    .post("/send",
+    .post("/send", async (req: Request, res: Response) => {
 
-        async (req: Request, res: Response) => {
+             await businessService.doOperaton()
 
-        await emailAdapter.sendEmail(req.body.subject, req.body.message, req.body.email )
+            res.send(200);
 
 
-});
+        });
