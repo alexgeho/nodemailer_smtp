@@ -1,15 +1,17 @@
-import nodemailer from "nodemailer";
-import {emailAdapter} from "../adapter/email-adapter";
+import { emailAdapter } from "../adapter/email-adapter";
 
 export const emailManager = {
 
-    async senEmailRecoveryMessage (user: any, ) {
-        // save to repo
-        // get user from repo
-        await emailAdapter.sendEmail("user.email", "password recovery", "<div>`${user.recoveryCode} message`</div>")
+    async sendPasswordRecoveryMessage(email: string) {
+        const recoveryCode
+            = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const subject = "Password Recovery";
+        const message = `<div>Your recovery code: <strong>${recoveryCode}</strong></div>`;
+        await emailAdapter.sendEmail(email, subject, message);
+        // TODO: Save recoveryCode to DB or memory associated with email
+    },
 
-        //subject, message, email
-
-
+    async sendGeneralEmail(user: { email: string, subject: string, message: string }) {
+        await emailAdapter.sendEmail(user.email, user.subject, user.message);
     }
 };

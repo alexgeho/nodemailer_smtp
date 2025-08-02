@@ -1,7 +1,9 @@
 import nodemailer from "nodemailer";
 
 export const emailAdapter = {
-    async sendEmail(subject: string, message: string, email: string) {
+
+    async sendEmail(to: string, subject: string, message: string) {
+
         const transporter = nodemailer.createTransport({
             host: "sandbox.smtp.mailtrap.io",
             port: 2525,
@@ -11,14 +13,13 @@ export const emailAdapter = {
             },
         });
 
-      let info = await transporter.sendMail({
-                from: '"Alexander Gerhard" <alex@itgeho.com>',
-                to: email,
-                subject: subject,
-                html: message,
-            });
+        let info = await transporter.sendMail({
+            from: '"Alexander Gerhard" <alex@itgeho.com>',
+            to,
+            subject,
+            html: message,
+        });
 
-          return info;
-
+        return info;
     }
 };
